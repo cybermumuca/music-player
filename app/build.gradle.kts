@@ -42,9 +42,7 @@ android {
 }
 
 dependencies {
-    // Dagger Hilt
-    ksp(libs.hilt.android.compiler)
-    implementation(libs.hilt.android)
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -61,4 +59,18 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Dagger Hilt
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+
+    // ExoPlayer
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.exoplayer.dash)
+    implementation(libs.androidx.media3.session)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.lifecycle.viewmodel.compose)
+
+    // Glide
+    implementation(libs.glide)
 }
