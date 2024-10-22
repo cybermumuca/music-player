@@ -15,9 +15,12 @@ import dagger.hilt.android.components.ServiceComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Singleton
 import androidx.media3.session.MediaSession
+import com.mumuca.musicplayer.player.notification.MusicNotificationManager
+import com.mumuca.musicplayer.player.service.MusicServiceHandler
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ServiceComponent::class)
+@InstallIn(SingletonComponent::class)
 object MediaModule {
     @Provides
     @Singleton
@@ -44,4 +47,19 @@ object MediaModule {
         @ApplicationContext context: Context,
         player: ExoPlayer,
     ): MediaSession = MediaSession.Builder(context, player).build()
+
+    @Provides
+    @Singleton
+    fun provideNotificationManager(
+        @ApplicationContext context: Context,
+        player: ExoPlayer,
+    ): MusicNotificationManager = MusicNotificationManager(
+        context,
+        player
+    )
+
+    @Provides
+    @Singleton
+    fun provideServiceHandler(exoPlayer: ExoPlayer): MusicServiceHandler =
+        MusicServiceHandler(exoPlayer)
 }

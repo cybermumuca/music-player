@@ -1,4 +1,4 @@
-package com.mumuca.musicplayer.player
+package com.mumuca.musicplayer.player.service
 
 import android.content.Intent
 import androidx.media3.common.Player
@@ -9,7 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class MusicService: MediaSessionService() {
+class MusicService : MediaSessionService() {
 
     @Inject
     lateinit var mediaSession: MediaSession
@@ -28,20 +28,19 @@ class MusicService: MediaSessionService() {
 
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaSession = mediaSession
 
-    override fun onDestroy() {
-        super.onDestroy()
-
-        mediaSession.apply {
-            release()
-
-            player.apply {
-                if (playbackState != Player.STATE_IDLE) {
-                    seekTo(0)
-                    playWhenReady = false
-                    stop()
-                }
-            }
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        val player = mediaSession.player
+        if (!player.playWhenReady || player.mediaItemCount == 0 || player.playbackState == Player.STATE_ENDED) {
+            stopSelf()
         }
+    }
+
+    override fun onDestroy() {
+        mediaSession.run {
+            player.release()
+            release()
+        }
+        super.onDestroy()
     }
 
 }

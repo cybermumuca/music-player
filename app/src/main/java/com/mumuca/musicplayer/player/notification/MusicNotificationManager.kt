@@ -1,6 +1,5 @@
 package com.mumuca.musicplayer.player.notification
 
-import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Context
@@ -11,7 +10,7 @@ import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.session.MediaSession
 import androidx.media3.session.MediaSessionService
-import androidx.media3.session.R
+import com.mumuca.musicplayer.R
 import androidx.media3.ui.PlayerNotificationManager
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
@@ -59,7 +58,7 @@ class MusicNotificationManager @Inject constructor(
                 context,
                 mediaSession.sessionActivity
             ))
-            .setSmallIconResourceId(R.drawable.media3_icon_play)
+            .setSmallIconResourceId(R.drawable.ic_launcher_foreground)
             .build()
             .also {
                 it.setMediaSessionToken(mediaSession.platformToken)
