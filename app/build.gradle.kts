@@ -42,8 +42,6 @@ android {
 }
 
 dependencies {
-
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -63,6 +61,7 @@ dependencies {
     // Dagger Hilt
     ksp(libs.hilt.android.compiler)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
 
     // ExoPlayer
     implementation(libs.androidx.media3.exoplayer)
@@ -73,4 +72,12 @@ dependencies {
 
     // Glide
     implementation(libs.glide)
+
+
+    // Coil
+    implementation(libs.coil.compose)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+
 }
