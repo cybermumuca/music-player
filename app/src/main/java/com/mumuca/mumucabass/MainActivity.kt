@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.mumuca.mumucabass.ui.navigation.AppNavigation
+import com.mumuca.mumucabass.ui.navigation.MumucaBassApp
 import com.mumuca.mumucabass.ui.theme.MumucaBassTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -15,7 +16,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MumucaBassTheme {
-                AppNavigation()
+                MumucaBassApp()
             }
         }
     }

@@ -12,21 +12,18 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.navigation.NavHostController
-import com.mumuca.mumucabass.ui.library.components.CollectionCard
-import com.mumuca.mumucabass.ui.navigation.Screen
+import com.mumuca.mumucabass.data.local.models.Album
+import com.mumuca.mumucabass.ui.library.components.AlbumCard
 
-
-data class Collection(val title: String, val type: String, val author: String, val cover: String)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LibraryScreen(navController: NavHostController) {
-    val collections = listOf<Collection>(
-        Collection("Mídia Local", "Playlist", "keyboardistmumuca", "https://picsum.photos/200/300"),
-        Collection("Adeus Tokyo Part I", "Álbum", "Japa", "https://picsum.photos/200/300"),
-        Collection("Adeus Tokyo Part II", "Álbum", "Japa", "https://picsum.photos/200/300"),
-        Collection("FNB>BKB", "Single", "Japa", "https://picsum.photos/200/300")
+fun LibraryScreen(onAlbumClick: (Int) -> Unit) {
+    val albums = listOf<Album>(
+        Album(1, "Mídia Local", "Playlist", "keyboardistmumuca", "https://picsum.photos/200/300"),
+        Album(2, "Adeus Tokyo Part I", "Álbum", "Japa", "https://picsum.photos/200/300"),
+        Album(3, "Adeus Tokyo Part II", "Álbum", "Japa", "https://picsum.photos/200/300"),
+        Album(4, "FNB>BKB", "Single", "Japa", "https://picsum.photos/200/300")
     )
 
     Scaffold(
@@ -42,14 +39,14 @@ fun LibraryScreen(navController: NavHostController) {
                     .background(Color.Black)
                     .padding(paddingValues)
             ) {
-                items(collections.size) { index ->
-                    CollectionCard(
-                        title = collections[index].title,
-                        type = collections[index].type,
-                        author = collections[index].author,
-                        cover = collections[index].cover,
+                items(albums.size) { index ->
+                    AlbumCard(
+                        title = albums[index].title,
+                        type = albums[index].type,
+                        author = albums[index].author,
+                        cover = albums[index].cover,
                         onClick = {
-                            navController.navigate("${Screen.CollectionScreen}/${collections[index].title}")
+                            onAlbumClick(albums[index].id)
                         }
                     )
                 }

@@ -24,20 +24,28 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.mumuca.mumucabass.data.local.models.Album
 import com.mumuca.mumucabass.data.local.models.Track
+
+val albums = listOf<Album>(
+    Album(1, "Mídia Local", "Playlist", "keyboardistmumuca", "https://picsum.photos/200/300"),
+    Album(2, "Adeus Tokyo Part I", "Álbum", "Japa", "https://picsum.photos/200/300"),
+    Album(3, "Adeus Tokyo Part II", "Álbum", "Japa", "https://picsum.photos/200/300"),
+    Album(4, "FNB>BKB", "Single", "Japa", "https://picsum.photos/200/300")
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CollectionScreen(
-    albumName: String,
-    artistName: String,
-    collectionCover: String
+fun AlbumScreen(
+    albumId: Int
 ) {
+    val album = albums.find { it.id == albumId } ?: albums.first()
+
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
-                    Text(text = albumName, fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                    Text(text = album.title, fontSize = 20.sp, fontWeight = FontWeight.Bold)
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
@@ -54,15 +62,15 @@ fun CollectionScreen(
             ) {
                 Row(modifier = Modifier.padding(bottom = 16.dp)) {
                     AsyncImage(
-                        model = collectionCover,
+                        model = album.cover,
                         contentDescription = null,
                         modifier = Modifier.size(128.dp),
                         contentScale = ContentScale.Crop
                     )
                     Spacer(modifier = Modifier.width(16.dp))
                     Column {
-                        Text(text = albumName, fontSize = 24.sp, fontWeight = FontWeight.Bold)
-                        Text(text = artistName, fontSize = 16.sp, color = Color.Gray)
+                        Text(text = album.title, fontSize = 24.sp, fontWeight = FontWeight.Bold)
+                        Text(text = album.author, fontSize = 16.sp, color = Color.Gray)
                     }
                 }
                 LazyColumn {
@@ -87,14 +95,4 @@ fun TrackItem(track: Track) {
         Text(text = track.artist, fontSize = 14.sp, color = Color.Gray)
         Text(text = track.duration.toString(), fontSize = 12.sp, color = Color.Gray)
     }
-}
-
-@Preview
-@Composable
-fun CollectionScreenPreview() {
-    CollectionScreen(
-        albumName = "Album Name",
-        artistName = "Artist Name",
-        collectionCover = "https://picsum.photos/200/300"
-    )
 }

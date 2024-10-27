@@ -3,6 +3,7 @@ package com.mumuca.mumucabass.player.service
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.Job
@@ -79,6 +80,7 @@ class MusicServiceHandler @Inject constructor(
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onIsPlayingChanged(isPlaying: Boolean) {
         _playerState.value = PlayerState.Playing(isPlaying = isPlaying)
         _playerState.value = PlayerState.CurrentPlaying(exoPlayer.currentMediaItemIndex)

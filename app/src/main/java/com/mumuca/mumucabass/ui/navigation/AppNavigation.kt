@@ -1,30 +1,32 @@
 package com.mumuca.mumucabass.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.mumuca.mumucabass.ui.collection.CollectionScreen
+import androidx.navigation.toRoute
+import com.mumuca.mumucabass.ui.collection.AlbumScreen
 import com.mumuca.mumucabass.ui.library.LibraryScreen
 
-object Screen {
-    const val LibraryScreen = "libraryScreen"
-    const val CollectionScreen = "collectionScreen"
+@Composable
+fun MumucaBassApp() {
+    val navController = rememberNavController()
+    val startScreen = Screen.LibraryScreen
+    AppNavigation(navController, startScreen)
 }
 
 @Composable
-fun AppNavigation() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = Screen.LibraryScreen) {
-        composable(Screen.LibraryScreen) {
-            LibraryScreen(navController)
+fun AppNavigation(navController: NavHostController, startDestination: Screen) {
+    NavHost(navController = navController, startDestination = startDestination) {
+        composable<Screen.LibraryScreen> {
+            LibraryScreen(onAlbumClick = { albumId ->
+                navController.navigate(Screen.AlbumScreen(albumId))
+            })
         }
-        composable("${Screen.CollectionScreen}/{albumName}") { backStackEntry ->
-            val albumName = backStackEntry.arguments?.getString("albumName") ?: "Default Album"
-            val artistName = backStackEntry.arguments?.getString("artistName") ?: "Default Artist"
-            val collectionCover = backStackEntry.arguments?.getString("collectionCover") ?: "https://picsum.photos/200/300"
-            CollectionScreen(albumName = albumName, artistName = artistName, collectionCover = collectionCover)
+        composable<Screen.AlbumScreen> { backStackEntry ->
+            val data = backStackEntry.toRoute<Screen.AlbumScreen>()
+            AlbumScreen(albumId = data.albumId)
         }
     }
 }

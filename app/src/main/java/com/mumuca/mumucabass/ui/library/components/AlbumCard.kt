@@ -16,13 +16,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 
 
 @Composable
-fun CollectionCard(title: String, type: String, author: String, cover: String, onClick: () -> Unit) {
+fun AlbumCard(title: String, type: String, author: String, cover: String, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -65,16 +64,4 @@ fun CollectionCard(title: String, type: String, author: String, cover: String, o
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun CollectionPreview() {
-    CollectionCard(
-        title = "My Music Collection",
-        type = "Album",
-        author = "Samuel Laurindo",
-        cover = "https://picsum.photos/200/300",
-        onClick = {}
-    )
 }
