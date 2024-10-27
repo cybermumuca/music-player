@@ -1,4 +1,4 @@
-# Music Player
+# Mumuca Bass
 
 Um aplicativo moderno de player de música construído usando Kotlin e Jetpack Compose. 
 

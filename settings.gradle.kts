@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "music-player"
+rootProject.name = "mumucabass"
 include(":app")

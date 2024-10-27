@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.mumuca.musicplayer"
+    namespace = "com.mumuca.mumucabass"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.mumuca.musicplayer"
+        applicationId = "com.mumuca.mumucabass"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
