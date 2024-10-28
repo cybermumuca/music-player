@@ -1,4 +1,4 @@
-package com.mumuca.mumucabass.data.local
+package com.mumuca.mumucabass.data
 
 import android.content.ContentUris
 import android.content.Context
@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.WorkerThread
-import com.mumuca.mumucabass.data.local.models.Track
+import com.mumuca.mumucabass.domain.entity.Track
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
@@ -17,11 +17,12 @@ class ContentResolverHelper @Inject constructor(@ApplicationContext private val 
         MediaStore.Audio.AudioColumns.ARTIST,
         MediaStore.Audio.AudioColumns.DATA,
         MediaStore.Audio.AudioColumns.DURATION,
-        MediaStore.Audio.AudioColumns.TITLE
+        MediaStore.Audio.AudioColumns.TITLE,
+        MediaStore.Audio.AudioColumns.MIME_TYPE
     )
 
-    private val selectionClause = "${MediaStore.Audio.AudioColumns.IS_MUSIC} = ? AND ${MediaStore.Audio.Media.MIME_TYPE} NOT IN (?, ?, ?)"
-    private val selectionArgs = arrayOf("1", "audio/amr", "audio/3gpp", "audio/aac")
+    private val selectionClause = "${MediaStore.Audio.AudioColumns.IS_MUSIC} = ?"
+    private val selectionArgs = arrayOf("1")
     private val sortOrder = "${MediaStore.Audio.AudioColumns.DISPLAY_NAME} ASC"
 
     @WorkerThread
@@ -33,6 +34,7 @@ class ContentResolverHelper @Inject constructor(@ApplicationContext private val 
             selectionArgs,
             sortOrder
         )?.use { cursor ->
+
             if (cursor.count == 0) {
                 Log.e("ContentResolverHelper", "getAudioData: Cursor is empty")
                 return emptyList()

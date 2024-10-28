@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.mumuca.mumucabass.ui.collection.AlbumScreen
+import com.mumuca.mumucabass.ui.album.AlbumScreen
 import com.mumuca.mumucabass.ui.library.LibraryScreen
 
 @Composable
@@ -25,6 +25,7 @@ fun AppNavigation(navController: NavHostController, startDestination: Screen) {
             })
         }
         composable<Screen.AlbumScreen> { backStackEntry ->
+
             val data = backStackEntry.toRoute<Screen.AlbumScreen>()
             AlbumScreen(albumId = data.albumId)
         }

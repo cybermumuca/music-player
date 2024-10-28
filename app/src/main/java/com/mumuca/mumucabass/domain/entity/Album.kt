@@ -1,4 +1,4 @@
-package com.mumuca.mumucabass.data.local.models
+package com.mumuca.mumucabass.domain.entity
 
 data class Album(
     val id: Int,

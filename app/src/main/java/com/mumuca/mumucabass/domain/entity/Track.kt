@@ -1,4 +1,4 @@
-package com.mumuca.mumucabass.data.local.models
+package com.mumuca.mumucabass.domain.entity
 
 import android.net.Uri
 
@@ -11,3 +11,4 @@ data class Track(
     val duration: Int,
     val title: String,
 )
+

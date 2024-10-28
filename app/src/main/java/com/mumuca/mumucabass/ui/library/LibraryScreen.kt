@@ -10,21 +10,27 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.mumuca.mumucabass.data.local.models.Album
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.mumuca.mumucabass.ui.library.components.AlbumCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LibraryScreen(onAlbumClick: (Int) -> Unit) {
-    val albums = listOf<Album>(
-        Album(1, "Mídia Local", "Playlist", "keyboardistmumuca", "https://picsum.photos/200/300"),
-        Album(2, "Adeus Tokyo Part I", "Álbum", "Japa", "https://picsum.photos/200/300"),
-        Album(3, "Adeus Tokyo Part II", "Álbum", "Japa", "https://picsum.photos/200/300"),
-        Album(4, "FNB>BKB", "Single", "Japa", "https://picsum.photos/200/300")
-    )
+fun LibraryScreen(
+    onAlbumClick: (Int) -> Unit,
+    viewModel: LibraryViewModel = hiltViewModel()
+) {
+    val albums = viewModel.albums.collectAsState().value
+
+    LaunchedEffect(Unit) {
+        viewModel.fetchAlbums()
+    }
 
     Scaffold(
         topBar = {
