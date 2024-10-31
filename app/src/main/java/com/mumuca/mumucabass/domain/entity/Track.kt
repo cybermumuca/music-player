@@ -1,14 +1,19 @@
 package com.mumuca.mumucabass.domain.entity
 
-import android.net.Uri
-
 data class Track(
-    val uri: Uri,
-    val displayName: String,
     val id: Long,
-    val artist: String,
-    val data: String,
-    val duration: Int,
     val title: String,
-)
-
+    val artist: String,
+    val album: String,
+    val albumArtist: String?,
+    val duration: Long,
+    val location: String?,
+    val coverUri: String?,
+    val metadata: TrackMetadata,
+    val source: Source
+) {
+    enum class Source {
+        API,
+        LOCAL
+    }
+}

@@ -10,12 +10,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mumuca.mumucabass.domain.entity.Track
+import com.mumuca.mumucabass.util.formatDuration
 
 @Composable
 fun TrackCard(track: Track) {
     Column(modifier = Modifier.padding(vertical = 8.dp)) {
         Text(text = track.title, fontSize = 18.sp, fontWeight = FontWeight.Medium)
         Text(text = track.artist, fontSize = 14.sp, color = Color.Gray)
-        Text(text = track.duration.toString(), fontSize = 12.sp, color = Color.Gray)
+        Text(text = track.duration.formatDuration(), fontSize = 12.sp, color = Color.Gray)
     }
 }
