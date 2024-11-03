@@ -25,7 +25,6 @@ fun AppNavigation(navController: NavHostController, startDestination: Screen) {
             })
         }
         composable<Screen.AlbumScreen> { backStackEntry ->
-
             val data = backStackEntry.toRoute<Screen.AlbumScreen>()
             AlbumScreen(albumId = data.albumId)
         }

@@ -1,8 +1,12 @@
 package com.mumuca.mumucabass.di
 
-import com.mumuca.mumucabass.data.ContentResolverHelper
-import com.mumuca.mumucabass.data.repositories.RemoteAlbumRepository
-import com.mumuca.mumucabass.data.repositories.RemoteTrackRepository
+import com.mumuca.mumucabass.data.local.repository.LocalAlbumRepository
+import com.mumuca.mumucabass.data.local.repository.LocalTrackRepository
+import com.mumuca.mumucabass.data.local.repository.helper.ContentResolverHelper
+import com.mumuca.mumucabass.data.remote.repository.RemoteAlbumRepository
+import com.mumuca.mumucabass.data.remote.repository.RemoteTrackRepository
+import com.mumuca.mumucabass.di.qualifier.Local
+import com.mumuca.mumucabass.di.qualifier.Remote
 import com.mumuca.mumucabass.domain.repository.AlbumRepository
 import com.mumuca.mumucabass.domain.repository.TrackRepository
 import dagger.Module
@@ -17,10 +21,24 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideAlbumRepository(): AlbumRepository = RemoteAlbumRepository()
+    @Remote
+    fun provideRemoteAlbumRepository(): AlbumRepository = RemoteAlbumRepository()
 
     @Provides
     @Singleton
-    fun provideTrackRepository(contentResolverHelper: ContentResolverHelper): TrackRepository =
-        RemoteTrackRepository(contentResolverHelper)
+    @Remote
+    fun provideRemoteTrackRepository(): TrackRepository =
+        RemoteTrackRepository()
+
+    @Provides
+    @Singleton
+    @Local
+    fun provideLocalAlbumRepository(contentResolverHelper: ContentResolverHelper): AlbumRepository =
+        LocalAlbumRepository(contentResolverHelper)
+
+    @Provides
+    @Singleton
+    @Local
+    fun provideLocalTrackRepository(contentResolverHelper: ContentResolverHelper): TrackRepository =
+        LocalTrackRepository(contentResolverHelper)
 }

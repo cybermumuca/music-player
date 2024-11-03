@@ -24,39 +24,18 @@ import com.mumuca.mumucabass.ui.library.components.AlbumCard
 @Composable
 fun LibraryScreen(
     onAlbumClick: (Int) -> Unit,
-    viewModel: LibraryViewModel = hiltViewModel()
 ) {
-    val albums = viewModel.albums.collectAsState().value
-
-    LaunchedEffect(Unit) {
-        viewModel.fetchAlbums()
-    }
-
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("Biblioteca de Mídia", color = Color.White) }
             )
         },
-        content = { paddingValues ->
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black)
-                    .padding(paddingValues)
-            ) {
-                items(albums.size) { index ->
-                    AlbumCard(
-                        title = albums[index].title,
-                        type = albums[index].type,
-                        author = albums[index].author,
-                        cover = albums[index].cover,
-                        onClick = {
-                            onAlbumClick(albums[index].id)
-                        }
-                    )
-                }
-            }
+        content = {
+            // TODO: WIP
+            // TODO: WIP Favorite Tracks Card
+            // TODO: WIP Local Tracks Card
+            // TODO: WIP ALbums Card
         },
         bottomBar = {
             BottomAppBar(

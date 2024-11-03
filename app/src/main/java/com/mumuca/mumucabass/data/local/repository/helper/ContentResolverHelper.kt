@@ -1,11 +1,11 @@
-package com.mumuca.mumucabass.data
+package com.mumuca.mumucabass.data.local.repository.helper
 import android.media.MediaMetadataRetriever
-import android.content.ContentUris
 import android.content.Context
 import android.database.Cursor
 import android.provider.MediaStore
 import android.util.Log
 import androidx.annotation.WorkerThread
+import com.mumuca.mumucabass.domain.entity.Album
 import com.mumuca.mumucabass.domain.entity.Track
 import com.mumuca.mumucabass.domain.entity.TrackMetadata
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -34,7 +34,7 @@ class ContentResolverHelper @Inject constructor(@ApplicationContext private val 
     private val sortOrder = "${MediaStore.Audio.AudioColumns.DISPLAY_NAME} ASC"
 
     @WorkerThread
-    fun getTrackData(): List<Track> {
+    fun getTracks(): List<Track> {
         return context.contentResolver.query(
             MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
             projection,
